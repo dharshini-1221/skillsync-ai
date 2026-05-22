@@ -511,22 +511,42 @@ Return this exact JSON structure:
     "suggestion": "string"
   },
   "skills": {
-    "technical": [],
-    "soft": []
-  },
+  "languages": [],
+  "frameworks": [],
+  "tools": [],
+  "databases": [],
+  "cloud": [],
+  "certifications": [],
+  "soft_skills": [],
+  "projects": []
+},
   "skill_gaps": [],
   "recommended_technologies": [],
   "learning_resources": [],
   "project_ideas": [],
   "roadmap": {
-    "beginner": [],
-    "intermediate": [],
-    "advanced": []
+  "phase_1": {
+    "title": "",
+    "steps": []
   },
+  "phase_2": {
+    "title": "",
+    "steps": []
+  },
+  "phase_3": {
+    "title": "",
+    "steps": []
+  }
+},
   "interview_preparation": {
-    "technical_questions": [],
-    "hr_questions": []
+  "aptitude": {
+    "quantitative": [],
+    "logical_reasoning": [],
+    "verbal": []
   },
+  "technical_tips": [],
+  "hr_tips": []
+},
   "scores": {
     "ats": 85,
     "readiness": 80
@@ -595,8 +615,41 @@ try {
     action_steps: ["Retry analysis"]
   };
 }
+if (!d.skills) {
+  d.skills = {
+    languages: [],
+    frameworks: [],
+    tools: [],
+    databases: [],
+    cloud: [],
+    certifications: [],
+    soft_skills: [],
+    projects: []
+  };
+}
+
+if (!d.roadmap) {
+  d.roadmap = {
+    phase_1: { title: "", steps: [] },
+    phase_2: { title: "", steps: [] },
+    phase_3: { title: "", steps: [] }
+  };
+}
+
+if (!d.interview_preparation) {
+  d.interview_preparation = {
+    aptitude: {
+      quantitative: [],
+      logical_reasoning: [],
+      verbal: []
+    },
+    technical_tips: [],
+    hr_tips: []
+  };
+}
 
 renderResults(d);
+
   } catch(e) {
     document.getElementById('loading').style.display = 'none';
     errBox.textContent = '⚠️ Analysis failed: ' + e.message;
