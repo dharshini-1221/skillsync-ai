@@ -500,6 +500,10 @@ Do NOT use \`\`\`json
 Do NOT explain anything.
 
 Return this exact JSON structure:
+IMPORTANT:
+Fill EVERY field with meaningful content.
+Do NOT leave arrays empty.
+Always provide at least 5 items for skills, roadmap, interview tips, resources, and technologies.
 
 {
   "resume_summary": "string",
@@ -510,40 +514,38 @@ Return this exact JSON structure:
     "gap_details": "string",
     "suggestion": "string"
   },
-  "skills": {
-  "languages": [],
-  "frameworks": [],
-  "tools": [],
-  "databases": [],
-  "cloud": [],
-  "certifications": [],
-  "soft_skills": [],
-  "projects": []
+ "skills": {
+  "languages": ["Python","Java"],
+  "frameworks": ["React","Node.js"],
+  "tools": ["Git","Docker"],
+  "databases": ["MongoDB","MySQL"],
+  "cloud": ["AWS"],
+  "soft_skills": ["Communication"],
+  "certifications": ["AWS Certified"]
 },
   "skill_gaps": [],
   "recommended_technologies": [],
   "learning_resources": [],
   "project_ideas": [],
-  "roadmap": {
-  "phase_1": {
-    "title": "",
-    "steps": []
-  },
-  "phase_2": {
-    "title": "",
-    "steps": []
-  },
+ "roadmap": {
+  "beginner": ["Learn DSA","Practice JS"],
+  "intermediate": ["Build Projects","Learn System Design"],
+  "advanced": ["Mock Interviews","Open Source"]
+},
   "phase_3": {
     "title": "",
     "steps": []
   }
 },
-  "interview_preparation": {
+ "interview_preparation": {
   "aptitude": {
-    "quantitative": [],
-    "logical_reasoning": [],
-    "verbal": []
+    "quantitative": ["Profit and Loss"],
+    "logical_reasoning": ["Puzzles"],
+    "verbal": ["Reading Comprehension"]
   },
+  "technical_tips": ["Revise DBMS"],
+  "hr_tips": ["Prepare self introduction"]
+},
   "technical_tips": [],
   "hr_tips": []
 },
