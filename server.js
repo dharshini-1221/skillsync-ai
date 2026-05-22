@@ -1,7 +1,10 @@
+
 require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const app = express();
 
@@ -40,7 +43,7 @@ app.post("/api/analyze", async (req, res) => {
 
     const text =
       data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response from Gemini";
+      "{}";
 
     res.json({
       content: [
