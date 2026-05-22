@@ -544,12 +544,41 @@ Return ONLY valid JSON. Do not add explanations before or after the JSON. No mar
     const text = (data.content || []).map(i => i.text || '').join('');
     const clean = text.replace(/```json/g, '').replace(/```/g, '').trim();
     const jsonMatch = clean.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      console.error("Raw AI response:", clean);
-      throw new Error("Could not parse AI response as JSON");
-    }
-    const d = JSON.parse(jsonMatch[0]);
-    renderResults(d);
+
+if (!jsonMatch) {
+  console.error("Raw AI response:", clean);
+  throw new Error("Could not parse AI response as JSON");
+}
+
+let d;
+
+try {
+  d = JSON.parse(jsonMatch[0]);
+} catch (e) {
+  console.error("JSON Parse Error:", e);
+
+  d = {
+    resume_summary: "AI response formatting issue.",
+    education_timeline: [],
+    work_experience_timeline: [],
+    career_gap_analysis: {
+      has_gap: false,
+      gap_details: "Unable to detect.",
+      suggestion: "Retry analysis."
+    },
+    skills: {},
+    skill_gaps: [],
+    recommended_technologies: [],
+    learning_resources: [],
+    project_ideas: [],
+    roadmap: {},
+    interview_preparation: {},
+    scores: { ats: 70, readiness: 70 },
+    action_steps: ["Retry analysis"]
+  };
+}
+
+renderResults(d);
   } catch(e) {
     document.getElementById('loading').style.display = 'none';
     errBox.textContent = '⚠️ Analysis failed: ' + e.message;
