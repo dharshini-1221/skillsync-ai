@@ -490,41 +490,59 @@ async function analyze() {
   document.getElementById('results').style.display = 'none';
   document.getElementById('loading').scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  const prompt = `You are SkillSync AI, a placement advisor for Indian engineering students.
-Analyze this resume for role: "${role}" at company type: "${company}".
+  const prompt = `
+You are an ATS Resume Analyzer AI.
+
+IMPORTANT:
+Return ONLY valid JSON.
+Do NOT return markdown.
+Do NOT use \`\`\`json
+Do NOT explain anything.
+
+Return this exact JSON structure:
+
+{
+  "resume_summary": "string",
+  "education_timeline": [],
+  "work_experience_timeline": [],
+  "career_gap_analysis": {
+    "has_gap": false,
+    "gap_details": "string",
+    "suggestion": "string"
+  },
+  "skills": {
+    "technical": [],
+    "soft": []
+  },
+  "skill_gaps": [],
+  "recommended_technologies": [],
+  "learning_resources": [],
+  "project_ideas": [],
+  "roadmap": {
+    "beginner": [],
+    "intermediate": [],
+    "advanced": []
+  },
+  "interview_preparation": {
+    "technical_questions": [],
+    "hr_questions": []
+  },
+  "scores": {
+    "ats": 85,
+    "readiness": 80
+  },
+  "action_steps": []
+}
 
 Resume:
 ${resume}
 
-Return ONLY valid JSON. Do not add explanations before or after the JSON. No markdown, no backticks, no preamble. Exact structure:
-{
- "resume_summary": "2-3 sentence professional summary",
- "education_timeline": [{"degree":"","institution":"","year_range":"","grade":""}],
- "work_experience_timeline": [{"role":"","company":"","year_range":"","description":""}],
- "career_gap_analysis": {"has_gap": false, "gap_details": "explain clearly", "suggestion": "actionable advice"},
- "skills": {"languages": [], "frameworks": [], "tools": [], "databases": [], "cloud": [], "soft_skills": [], "certifications": [], "projects": []},
- "skill_gaps": ["missing skill 1", "missing skill 2"],
- "recommended_technologies": ["tech 1", "tech 2"],
- "learning_resources": [{"name":"Resource Name","url":"https://...","topic":"Topic area"}],
- "project_ideas": [{"title":"Project Title","description":"What to build and why","tech_stack":["tech1","tech2"]}],
- "roadmap": {
-   "phase_1": {"title":"Foundation (Month 1-2)","steps":["step1","step2","step3","step4"]},
-   "phase_2": {"title":"Build & Practice (Month 3-4)","steps":["step1","step2","step3","step4"]},
-   "phase_3": {"title":"Apply & Crack (Month 5-6)","steps":["step1","step2","step3","step4"]}
- },
- "interview_preparation": {
-   "aptitude": {
-     "quantitative": ["topic1","topic2","topic3","topic4"],
-     "logical_reasoning": ["topic1","topic2","topic3","topic4"],
-     "verbal": ["topic1","topic2","topic3","topic4"]
-   },
-   "technical_tips": ["tip1","tip2","tip3","tip4","tip5"],
-   "hr_tips": ["tip1","tip2","tip3","tip4","tip5"]
- },
- "scores": {"ats": 70, "readiness": 65},
- "action_steps": ["step1","step2","step3","step4","step5"]
-}`;
+Target Role:
+${role}
 
+Company Type:
+${company}
+`;
   try {
     // ✅ FIXED: call your own backend, not Anthropic directly
     const res = await fetch('https://skillsync-ai-su19.onrender.com/api/analyze',  {
