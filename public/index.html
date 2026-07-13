@@ -570,7 +570,7 @@ ${company}
 `;
   try {
     // ✅ FIXED: call your own backend, not Anthropic directly
-   const res = await fetch('/api/analyze', {
+  const res = await fetch('https://skillsync-ai-1-vnbc.onrender.com/api/analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt })
