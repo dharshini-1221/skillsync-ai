@@ -41,9 +41,10 @@ app.post("/api/analyze", async (req, res) => {
 
     const data = await response.json();
 
-    const text =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "{}";
+    let cleanText = text
+  .replace(/```json/g, "")
+  .replace(/```/g, "")
+  .trim();
 
     res.json({
       content: [
