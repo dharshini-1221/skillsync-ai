@@ -47,12 +47,12 @@ app.post("/api/analyze", async (req, res) => {
   .trim();
 
     res.json({
-      content: [
-        {
-          text: text
-        }
-      ]
-    });
+  content: [
+    {
+      text: cleanText
+    }
+  ]
+});
 
   } catch (err) {
     console.error(err);
